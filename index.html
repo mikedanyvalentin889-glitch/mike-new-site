@@ -3,32 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Boutique</title>
+  <title>Ma petite boutique</title>
   <style>
-    body {font-family: Arial, sans-serif; margin:0; padding:20px; background:#f9f9f9;}
-    .product {border:1px solid #ddd; background:#fff; padding:15px; margin:10px; width:200px; display:inline-block; vertical-align:top;}
-    .product img {max-width:100%; height:auto;}
-    .cart {position:fixed; right:20px; top:20px; background:#fff; border:1px solid #ddd; padding:10px; width:250px;}
-    .cart h2 {margin-top:0;}
-    .cart-item {display:flex; justify-content:space-between; margin-bottom:5px;}
-    button {background:#28a745; color:#fff; border:none; padding:5px 10px; cursor:pointer;}
-    button:hover {background:#218838;}
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background:#f9f9f9;
+    }
+    h1 {
+      text-align:center;
+    }
+    .products {
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .product {
+      border:1px solid #ddd;
+      background:#fff;
+      padding:15px;
+      margin:10px;
+      width:220px;
+      box-sizing:border-box;
+      text-align:center;
+    }
+    .product img {
+      max-width:100%;
+      height:auto;
+      margin-bottom:10px;
+    }
+    .product h3 {
+      margin:10px 0 5px;
+      font-size:1.1em;
+    }
+    .product p {
+      margin:5px 0;
+    }
+    .product button {
+      background:#28a745;
+      color:#fff;
+      border:none;
+      padding:8px 12px;
+      cursor:pointer;
+      margin-top:5px;
+    }
+    .product button:hover {
+      background:#218838;
+    }
+    .cart {
+      position:fixed;
+      right:20px;
+      top:20px;
+      background:#fff;
+      border:1px solid #ddd;
+      padding:15px;
+      width:260px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    }
+    .cart h2 {
+      margin-top:0;
+      font-size:1.2em;
+    }
+    .cart-item {
+      display:flex;
+      justify-content:space-between;
+      margin-bottom:5px;
+    }
+    .cart button {
+      background:#007bff;
+      width:100%;
+      margin-top:10px;
+    }
+    .cart button:hover {
+      background:#0069d9;
+    }
   </style>
 </head>
 <body>
   <h1>Ma petite boutique</h1>
-  <div id="products">
-    <!-- Exemple de produits -->
-    <div class="product" data-id="1" data-name="Produit A" data-price="10">
-      <img src="https://via.placeholder.com/150" alt="Produit A">
-      <h3>Produit A</h3>
-      <p>Prix: 10 €</p>
+
+  <div class="products" id="products">
+    <!-- Produit 1 -->
+    <div class="product" data-id="1" data-name="T‑shirt Bleu" data-price="12.99">
+      <img src="https://via.placeholder.com/200x200.png?text=T‑shirt+Bleu" alt="T‑shirt Bleu">
+      <h3>T‑shirt Bleu</h3>
+      <p>Couleur : Bleu</p>
+      <p>Prix : 12,99 €</p>
       <button onclick="addToCart(this.parentNode)">Ajouter au panier</button>
     </div>
-    <div class="product" data-id="2" data-name="Produit B" data-price="15">
-      <img src="https://via.placeholder.com/150" alt="Produit B">
-      <h3>Produit B</h3>
-      <p>Prix: 15 €</p>
+
+    <!-- Produit 2 -->
+    <div class="product" data-id="2" data-name="Casquette Rouge" data-price="8.50">
+      <img src="https://via.placeholder.com/200x200.png?text=Casquette+Rouge" alt="Casquette Rouge">
+      <h3>Casquette Rouge</h3>
+      <p>Couleur : Rouge</p>
+      <p>Prix : 8,50 €</p>
+      <button onclick="addToCart(this.parentNode)">Ajouter au panier</button>
+    </div>
+
+    <!-- Produit 3 -->
+    <div class="product" data-id="3" data-name="Mug Blanc" data-price="5.75">
+      <img src="https://via.placeholder.com/200x200.png?text=Mug+Blanc" alt="Mug Blanc">
+      <h3>Mug Blanc</h3>
+      <p>Capacité : 300 ml</p>
+      <p>Prix : 5,75 €</p>
+      <button onclick="addToCart(this.parentNode)">Ajouter au panier</button>
+    </div>
+
+    <!-- Produit 4 -->
+    <div class="product" data-id="4" data-name="Sac à dos Vert" data-price="24.90">
+      <img src="https://via.placeholder.com/200x200.png?text=Sac+à+dos+Vert" alt="Sac à dos Vert">
+      <h3>Sac à dos Vert</h3>
+      <p>Volume : 20 L</p>
+      <p>Prix : 24,90 €</p>
+      <button onclick="addToCart(this.parentNode)">Ajouter au panier</button>
+    </div>
+
+    <!-- Produit 5 -->
+    <div class="product" data-id="5" data-name="Clé USB 32 Go" data-price="9.99">
+      <img src="https://via.placeholder.com/200x200.png?text=Clé+USB+32Go" alt="Clé USB 32 Go">
+      <h3>Clé USB 32 Go</h3>
+      <p>Capacité : 32 Go</p>
+      <p>Prix : 9,99 €</p>
       <button onclick="addToCart(this.parentNode)">Ajouter au panier</button>
     </div>
   </div>
@@ -36,20 +133,24 @@
   <div class="cart" id="cart">
     <h2>Panier</h2>
     <div id="cart-items"></div>
-    <p><strong>Total: </strong><span id="total">0</span> €</p>
+    <p><strong>Total :</strong> <span id="total">0.00</span> €</p>
     <button onclick="checkout()">Passer la commande</button>
   </div>
 
   <script>
     const cart = {};
+
     function addToCart(elem) {
       const id = elem.dataset.id;
       const name = elem.dataset.name;
       const price = parseFloat(elem.dataset.price);
-      cart[id] = cart[id] || {name, price, qty:0};
+      if (!cart[id]) {
+        cart[id] = {name, price, qty:0};
+      }
       cart[id].qty++;
       renderCart();
     }
+
     function renderCart() {
       const container = document.getElementById('cart-items');
       container.innerHTML = '';
@@ -58,15 +159,17 @@
         const item = cart[id];
         const line = document.createElement('div');
         line.className = 'cart-item';
-        line.innerHTML = `<span>${item.name} x ${item.qty}</span><span>${(item.price*item.qty).toFixed(2)} €</span>`;
+        line.innerHTML = `<span>${item.name} × ${item.qty}</span><span>${(item.price * item.qty).toFixed(2)} €</span>`;
         container.appendChild(line);
-        total += item.price*item.qty;
+        total += item.price * item.qty;
       }
       document.getElementById('total').textContent = total.toFixed(2);
     }
+
     function checkout() {
-      alert('Merci pour votre commande !\nTotal: ' + document.getElementById('total').textContent + ' €');
-      // Ici tu pourrais ajouter une intégration PayPal, Stripe, etc.
+      const total = document.getElementById('total').textContent;
+      alert('Merci pour votre commande !\nTotal : ' + total + ' €');
+      // Ici tu peux ajouter l'intégration d'un paiement (PayPal, Stripe, …)
       for (const id in cart) delete cart[id];
       renderCart();
     }
