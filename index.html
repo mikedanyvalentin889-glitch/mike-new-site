@@ -2,177 +2,119 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ma petite boutique</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ma Boutique Premium</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background:#f9f9f9;
-    }
-    h1 {
-      text-align:center;
-    }
-    .products {
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-    }
-    .product {
-      border:1px solid #ddd;
-      background:#fff;
-      padding:15px;
-      margin:10px;
-      width:220px;
-      box-sizing:border-box;
-      text-align:center;
-    }
-    .product img {
-      max-width:100%;
-      height:auto;
-      margin-bottom:10px;
-    }
-    .product h3 {
-      margin:10px 0 5px;
-      font-size:1.1em;
-    }
-    .product p {
-      margin:5px 0;
-    }
-    .product button {
-      background:#28a745;
-      color:#fff;
-      border:none;
-      padding:8px 12px;
-      cursor:pointer;
-      margin-top:5px;
-    }
-    .product button:hover {
-      background:#218838;
-    }
-    .cart {
-      position:fixed;
-      right:20px;
-      top:20px;
-      background:#fff;
-      border:1px solid #ddd;
-      padding:15px;
-      width:260px;
-      box-shadow:0 2px 6px rgba(0,0,0,0.1);
-    }
-    .cart h2 {
-      margin-top:0;
-      font-size:1.2em;
-    }
-    .cart-item {
-      display:flex;
-      justify-content:space-between;
-      margin-bottom:5px;
-    }
-    .cart button {
-      background:#007bff;
-      width:100%;
-      margin-top:10px;
-    }
-    .cart button:hover {
-      background:#0069d9;
+    /* Reset & base */
+    *, *::before, *::after {box-sizing:border-box; margin:0; padding:0;}
+    body {font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color:#111; background:#fff; line-height:1.5;}
+    a {color:inherit; text-decoration:none;}
+    img {max-width:100%; display:block;}
+
+    /* Navigation */
+    .nav {position:fixed; top:0; left:0; width:100%; height:60px; display:flex; align-items:center; justify-content:space-between; padding:0 2rem; background:rgba(255,255,255,0.9); backdrop-filter:blur(8px); z-index:10;}
+    .nav .logo {font-weight:600; font-size:1.2rem;}
+    .nav ul {list-style:none; display:flex; gap:1.5rem;}
+    .nav li {font-size:0.95rem; font-weight:500;}
+    .nav li:hover {color:#0071e3;}
+
+    /* Hero */
+    .hero {height:100vh; background:url('https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat; display:flex; flex-direction:column; justify-content:flex-end; padding:0 2rem 4rem; color:#fff; text-shadow:0 2px 4px rgba(0,0,0,0.5);}
+    .hero h1 {font-size:3.5rem; margin-bottom:0.5rem;}
+    .hero p {font-size:1.2rem; margin-bottom:1.5rem;}
+    .hero button {background:#0071e3; border:none; color:#fff; padding:0.8rem 1.6rem; font-size:1rem; border-radius:4px; cursor:pointer;}
+    .hero button:hover {background:#005bb5;}
+
+    /* Sections */
+    .section {padding:6rem 2rem; display:flex; flex-wrap:wrap; align-items:center; gap:3rem;}
+    .section:nth-child(even) {flex-direction:row-reverse;}
+    .section img {flex:1 1 45%; border-radius:8px;}
+    .section .txt {flex:1 1 45%;}
+    .section h2 {font-size:2.2rem; margin-bottom:0.8rem;}
+    .section p {font-size:1rem; color:#555; margin-bottom:1.2rem;}
+    .section button {background:#0071e3; border:none; color:#fff; padding:0.6rem 1.4rem; font-size:0.95rem; border-radius:4px; cursor:pointer;}
+    .section button:hover {background:#005bb5;}
+
+    /* Footer */
+    .footer {background:#f5f5f5; padding:3rem 2rem; text-align:center; font-size:0.9rem; color:#777;}
+    .footer a {margin:0 0.5rem;}
+    .footer a:hover {color:#111;}
+
+    /* Responsive */
+    @media (max-width:768px){
+      .nav {padding:0 1rem;}
+      .hero h1 {font-size:2.5rem;}
+      .section {flex-direction:column; text-align:center;}
+      .section img, .section .txt {flex:1 1 100%;}
     }
   </style>
 </head>
 <body>
-  <h1>Ma petite boutique</h1>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="logo">MaBoutique</div>
+    <ul>
+      <li><a href="#produits">Produits</a></li>
+      <li><a href="#inspirations">Inspirations</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-  <div class="products" id="products">
-    <!-- Produit 1 -->
-    <div class="product" data-id="1" data-name="T‑shirt Bleu" data-price="12.99">
-      <img src="https://via.placeholder.com/200x200.png?text=T‑shirt+Bleu" alt="T‑shirt Bleu">
-      <h3>T‑shirt Bleu</h3>
-      <p>Couleur : Bleu</p>
-      <p>Prix : 12,99 €</p>
-      <button onclick="addToCart(this.parentNode)">Ajouter au panier</button>
+  <!-- Hero -->
+  <section class="hero">
+    <h1>Design d'exception</h1>
+    <p>Découvrez nos produits premium, alliant élégance et performance.</p>
+    <button onclick="document.getElementById('produits').scrollIntoView({behavior:'smooth'});">Voir les produits</button>
+  </section>
+
+  <!-- Produit 1 -->
+  <section class="section" id="produits">
+    <img src="https://images.unsplash.com/photo-1581291519195-ef11498d1cf5?auto=format&fit=crop&w=800&q=80" alt="T‑shirt premium">
+    <div class="txt">
+      <h2>T‑shirt Premium</h2>
+      <p>Un T‑shirt en coton Supima, coupe moderne, disponible en plusieurs couleurs. Confort et style au quotidien.</p>
+      <button>Acheter 29,99 €</button>
     </div>
+  </section>
 
-    <!-- Produit 2 -->
-    <div class="product" data-id="2" data-name="Casquette Rouge" data-price="8.50">
-      <img src="https://via.placeholder.com/200x200.png?text=Casquette+Rouge" alt="Casquette Rouge">
-      <h3>Casquette Rouge</h3>
-      <p>Couleur : Rouge</p>
-      <p>Prix : 8,50 €</p>
-      <button onclick="addToCart(this.parentNode)">Ajouter au panier</button>
+  <!-- Produit 2 -->
+  <section class="section">
+    <img src="https://images.unsplash.com/photo-1580894908361-0c9c9f1c0d5c?auto=format&fit=crop&w=800&q=80" alt="Casque audio">
+    <div class="txt">
+      <h2>Casque Audio Sans Fil</h2>
+      <p>Son haute fidélité, réduction active du bruit, autonomie 30 h. Le compagnon idéal pour vos séances d'écoute.</p>
+      <button>Acheter 149,00 €</button>
     </div>
+  </section>
 
-    <!-- Produit 3 -->
-    <div class="product" data-id="3" data-name="Mug Blanc" data-price="5.75">
-      <img src="https://via.placeholder.com/200x200.png?text=Mug+Blanc" alt="Mug Blanc">
-      <h3>Mug Blanc</h3>
-      <p>Capacité : 300 ml</p>
-      <p>Prix : 5,75 €</p>
-      <button onclick="addToCart(this.parentNode)">Ajouter au panier</button>
+  <!-- Produit 3 -->
+  <section class="section">
+    <img src="https://images.unsplash.com/photo-1576675783612-0b4f0e9c9e2d?auto=format&fit=crop&w=800&q=80" alt="Montre connectée">
+    <div class="txt">
+      <h2>Montre Connectée</h2>
+      <p>Écran Retina, suivi santé, notifications intelligentes. Design élégant pour toutes les occasions.</p>
+      <button>Acheter 199,99 €</button>
     </div>
+  </section>
 
-    <!-- Produit 4 -->
-    <div class="product" data-id="4" data-name="Sac à dos Vert" data-price="24.90">
-      <img src="https://via.placeholder.com/200x200.png?text=Sac+à+dos+Vert" alt="Sac à dos Vert">
-      <h3>Sac à dos Vert</h3>
-      <p>Volume : 20 L</p>
-      <p>Prix : 24,90 €</p>
-      <button onclick="addToCart(this.parentNode)">Ajouter au panier</button>
+  <!-- Inspiratioins -->
+  <section class="section" id="inspirations">
+    <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=800&q=80" alt="Ambiance">
+    <div class="txt">
+      <h2>Inspiration & Lifestyle</h2>
+      <p>Nos produits s'intègrent à votre quotidien, que ce soit au travail, en voyage ou à la maison.</p>
+      <button>En savoir plus</button>
     </div>
+  </section>
 
-    <!-- Produit 5 -->
-    <div class="product" data-id="5" data-name="Clé USB 32 Go" data-price="9.99">
-      <img src="https://via.placeholder.com/200x200.png?text=Clé+USB+32Go" alt="Clé USB 32 Go">
-      <h3>Clé USB 32 Go</h3>
-      <p>Capacité : 32 Go</p>
-      <p>Prix : 9,99 €</p>
-      <button onclick="addToCart(this.parentNode)">Ajouter au panier</button>
-    </div>
-  </div>
-
-  <div class="cart" id="cart">
-    <h2>Panier</h2>
-    <div id="cart-items"></div>
-    <p><strong>Total :</strong> <span id="total">0.00</span> €</p>
-    <button onclick="checkout()">Passer la commande</button>
-  </div>
-
-  <script>
-    const cart = {};
-
-    function addToCart(elem) {
-      const id = elem.dataset.id;
-      const name = elem.dataset.name;
-      const price = parseFloat(elem.dataset.price);
-      if (!cart[id]) {
-        cart[id] = {name, price, qty:0};
-      }
-      cart[id].qty++;
-      renderCart();
-    }
-
-    function renderCart() {
-      const container = document.getElementById('cart-items');
-      container.innerHTML = '';
-      let total = 0;
-      for (const id in cart) {
-        const item = cart[id];
-        const line = document.createElement('div');
-        line.className = 'cart-item';
-        line.innerHTML = `<span>${item.name} × ${item.qty}</span><span>${(item.price * item.qty).toFixed(2)} €</span>`;
-        container.appendChild(line);
-        total += item.price * item.qty;
-      }
-      document.getElementById('total').textContent = total.toFixed(2);
-    }
-
-    function checkout() {
-      const total = document.getElementById('total').textContent;
-      alert('Merci pour votre commande !\nTotal : ' + total + ' €');
-      // Ici tu peux ajouter l'intégration d'un paiement (PayPal, Stripe, …)
-      for (const id in cart) delete cart[id];
-      renderCart();
-    }
-  </script>
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <p>© 2026 MaBoutique. Tous droits réservés.</p>
+    <p>
+      <a href="#">Mentions légales</a> |
+      <a href="#">Politique de confidentialité</a> |
+      <a href="#">Support</a>
+    </p>
+  </footer>
 </body>
 </html>
